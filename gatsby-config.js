@@ -12,6 +12,13 @@ module.exports = {
       resolve: "gatsby-source-wordpress",
       options: {
         url: "http://mywpsite.local/graphql",
+        type: {
+          MediaItem: {
+            localFile: {
+              maxFileSizeBytes: 300000,
+            },
+          },
+        },
       },
     },
     "gatsby-plugin-postcss",
