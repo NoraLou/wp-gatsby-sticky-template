@@ -8,6 +8,7 @@ import * as styles from "./page.module.css"
 
 const Page = ({ data }) => {
   const page = data.wpPage
+  console.log("Page :", data.wpPage)
   return (
     <Layout>
       <Seo title={page.title} image="/logo.png" pathname={page.uri} article />
@@ -21,6 +22,12 @@ const Page = ({ data }) => {
           </figure>
         )}
         <h1>{page.title}</h1>
+        by {page.author.node.name} Published on{" "}
+        {new Date(page.date).toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        })}
         <div dangerouslySetInnerHTML={{ __html: page.content }} />
       </article>
     </Layout>
@@ -35,6 +42,12 @@ export const query = graphql`
       title
       content
       uri
+      author {
+        node {
+          name
+        }
+      }
+      date
       featuredImage {
         node {
           fileSize
